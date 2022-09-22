@@ -7,13 +7,14 @@ import { Link, useNavigate } from 'react-router-dom';
 const LandingPage = () => {
     const [contacts, setContacts] = useState([])
     const navigate = useNavigate()
+    const normalApiCall = "http://cs3219otot-env.eba-re2hmdzp.ap-southeast-1.elasticbeanstalk.com/api/contacts";
+    const serverlessApiCall = "https://hc0j0ivcp8.execute-api.ap-southeast-1.amazonaws.com/getAllContacts";
 
     const handleClick = async () => {
-        await axios.get('http://cs3219otot-env.eba-re2hmdzp.ap-southeast-1.elasticbeanstalk.com/api/contacts')
+        await axios.get(serverlessApiCall)
             .then(res => {
-                if (res.data.data) {
-                    setContacts(res.data.data)
-                    console.log(res.data.data)
+                if (res.data) {
+                    setContacts(res.data)
                 }
             })
             .catch(err => {
